@@ -1,0 +1,117 @@
+<html>
+<head>
+	<title>Raspberry Pi - Surveillance Camera</title>
+</head>
+<body>
+	<center><img src="stream.mjpg" width="320" height="240"></center>
+	<center><button onclick="rotate()">rotateVid</button></center>
+	</br><center><p id='data'></p></center>
+	</br>
+	<center><button onclick="BRAKE()">STOP</button></center>
+    </br>
+    <center><button onclick="RTL()">RTL</button></center>
+    </br>
+	<center><button onclick="takeoff()">TAKEOFFFFFF!!!!!!!</button></center>
+	</br>
+	<center><button onclick="AUTO()">AUTO</button></center>
+    </br>
+	<center><label for="north">NOTRH</label><input id="north" type="text"></center>
+	<center><label for="east">EATS</label><input id="east" type="text"></center>
+	<center><label for="down">DOEN</label><input id="down" type="text"></center>
+	<center><button onclick="doGuided()">GO!!!!!!!</button></center>
+	
+	
+	</body>
+<script>
+	function rotate() {
+		const xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+               		if (this.readyState == 4 && this.status == 200) {
+                  		console.log(this.responseText);
+                	}
+              	};
+		xhttp.open("POST","rotate",true);
+		xhttp.send();
+	}
+	
+	function BRAKE() {
+		const xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+               		if (this.readyState == 4 && this.status == 200) {
+                  		console.log(this.responseText);
+                	}
+              	};
+		xhttp.open("POST","BRAKE",true);
+		xhttp.send();
+	}
+	
+	function RTL() {
+		const xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+               		if (this.readyState == 4 && this.status == 200) {
+                  		console.log(this.responseText);
+                	}
+              	};
+		xhttp.open("POST","RTL",true);
+		xhttp.send();
+	}
+	
+	function AUTO() {
+		const xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+               		if (this.readyState == 4 && this.status == 200) {
+                  		console.log(this.responseText);
+                	}
+              	};
+		xhttp.open("POST","AUTO",true);
+		xhttp.send();
+	}
+	
+	function takeoff() {
+		const xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+               		if (this.readyState == 4 && this.status == 200) {
+                  		console.log(this.responseText);
+                	}
+              	};
+		xhttp.open("POST","ARM_AND_TAKEOFF",true);
+		xhttp.send();
+	}
+	
+	function doGuided() {
+		const xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+               		if (this.readyState == 4 && this.status == 200) {
+                  		console.log(this.responseText);
+                	}
+              	};
+		xhttp.open("POST","doGuided",true);
+		xhttp.setRequestHeader("Content-Type", "application/json");
+		
+		var data = {
+          "North":document.getElementById("north").value,
+          "East":document.getElementById("east").value,
+          "Down":document.getElementById("down").value
+        };
+		
+		var jsonString = JSON.stringify(data);
+		
+		xhttp.send(jsonString);
+	}
+	
+	
+	let t = setInterval(getData, 5000)
+	
+	function getData() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("data").innerHTML = this.responseText;
+        }
+        };
+        xhttp.open("GET", "data", true);
+        xhttp.send();
+     }
+
+</script>
+</html>
