@@ -20,7 +20,6 @@ import json
 
 #vehicle = connect('/dev/serial0', wait_ready=False, baud=57600)
 
-
 #HELPER FUNCTIONS
 def get_location_metres(original_location, dNorth, dEast):
     """
